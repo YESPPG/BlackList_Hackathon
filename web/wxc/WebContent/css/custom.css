@@ -1,0 +1,48 @@
+.logo-expanded{
+    color: #fff;
+    font-size: 20px;
+}
+.block{
+    width: 200px;
+    height: 150px;
+    background: #fff;
+    display: inline-block;
+    position: absolute;
+    z-index: 999;
+}
+.block img{
+    width: 300px;
+    margin-left: -54px;
+}
+.block-top{
+    left: 50%;
+    margin-left: -100px;
+}
+.block-left{
+    left: 25%;
+    top: 220px;
+}
+.block-right{
+    top: 220px;
+    right: 25%;
+}
+.block-bottom{
+    top: 440px;
+    left: 50%;
+    margin-left: -100px;
+}
+.block .node-text{
+    font-size: 20px;
+    text-align: center;
+    background: #fff;
+}
+.line{
+    width: 35%;
+    height: 480px;
+    border: #ccc solid 5px;
+    position: absolute;
+    left: 50%;
+    top: 64px;
+    border-radius: 100%;
+    transform: translateX(-50%);
+}

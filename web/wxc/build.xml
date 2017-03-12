@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<project name="wxc" basedir="." default="makewar">
+	<property name="classpath_lib" value="WebContent/WEB-INF/lib" />
+	<property name="sources" value="${basedir}/src" />
+
+
+	<path id="classpath">
+		<!--添加lib 中的jar 包到软件中-->
+		<fileset dir="${classpath_lib}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+
+	<property name="debuglevel" value="source,lines,vars" />
+
+
+	<property name="target" value="1.7" />
+	<property name="source" value="1.7" />
+
+
+	<target name="init">
+		<property name="build" value="newbuild/destination/webapp">
+		</property>
+		<property name="src" value="src">
+		</property>
+		<delete dir="${build}">
+		</delete>
+		<mkdir dir="${build}" />
+		<mkdir dir="${build}\WEB-INF" />
+		<mkdir dir="${build}\WEB-INF\classes" />
+		<mkdir dir="${build}\WEB-INF\lib" />
+		<copy todir="${build}">
+			<fileset dir="${basedir}\WebContent">
+				<include name="WEB-INF/lib/**" />
+				<include name="WEB-INF/classes/**" />
+				<include name="WEB-INF/*.xml" />
+				<include name="META-INF/**" />
+				<include name="css/**" />
+				<include name="font/**" />
+				<include name="images/**" />
+				<include name="js/**" />
+				<include name="*.html" />
+				<include name="*.js" />
+			</fileset>
+		</copy>
+	</target>
+	<target name="complie" depends="init">
+		<!--添加源文件内容和编码utf-8 因为默是系统的本地时间-->
+		<javac srcdir="${src}" destdir="${build}/WEB-INF/classes" encoding="utf-8" classpathref="classpath" includeantruntime="on">
+		</javac>
+
+	</target>
+	<!--生成war 包结构-->
+	<target name="makewar" depends="complie">
+		<war warfile="${build}/wxc.war" webxml="${build}/WEB-INF/web.xml">
+			<classes dir="${build}/WEB-INF/classes" />
+			<fileset dir="${build}" />
+		</war>
+	</target>
+</project>

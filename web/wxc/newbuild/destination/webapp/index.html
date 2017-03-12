@@ -1,0 +1,22 @@
+<script type="text/javascript" src="jquery-1.11.2.min.js" ></script>
+<script>
+ 
+ fetch('http://localhost:8080/wxc/test',{
+       method:"post",
+       headers:{
+    	   "Content-Type": "application/x-www-form-urlencoded"
+        //  "Content-Type" : 'application/json'
+       },
+       body:"appID=1&apiName=3"
+    })
+    .then(status)
+    .then(function(data){
+       console.log(data)
+    }
+    )
+    .catch(
+      function(err){
+        console.log("Fetch error"+err)
+      }
+    )
+</script>

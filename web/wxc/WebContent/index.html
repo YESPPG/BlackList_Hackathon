@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="css/linecons.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/xenon-core.css" rel="stylesheet">
+    <link href="css/xenon-components.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+</head>
+<body class="page-body">
+<div class="page-container" id="app">
+    <div class="sidebar-menu toggle-others fixed">
+        <div class="sidebar-menu-inner ps-container ps-active-y">
+            <header class="logo-env">
+                <div class="logo">
+                    <a href="javascript:void(0);" class="logo-expanded">
+                        XX银行
+                    </a>
+                </div>
+                <div class="mobile-menu-toggle visible-xs">
+                    <a href="#" data-toggle="user-info-menu">
+                        <i class="fa-bell-o"></i>
+                        <span class="badge badge-success">7</span>
+                    </a>
+
+                    <a href="#" data-toggle="mobile-menu">
+                        <i class="fa-bars"></i>
+                    </a>
+                </div>
+            </header>
+            <ul id="main-menu" class="main-menu">
+                <li v-bind:class="{active:item=='queryAmount'}">
+                    <a href="javascript:;" @click="item='queryAmount'">
+                        <i class="linecons-money"></i>
+                        <span class="title">余额：1000</span>
+                    </a>
+                </li>
+                <li v-bind:class="{active:item=='queryCount'}">
+                    <a href="javascript:;" @click="item='queryCount'">
+                        <i class="linecons-search"></i>
+                        <span class="title">查询笔数：150</span>
+                    </a>
+                </li>
+                <li v-bind:class="{active:item=='recorded'}">
+                    <a href="javascript:;" @click="item='recorded'">
+                        <i class="linecons-tag"></i>
+                        <span class="title">被查记录：300</span>
+                    </a>
+                </li>
+                <li v-bind:class="{active:item=='validRecorded'}">
+                    <a href="javascript:;" @click="item='validRecorded'">
+                        <i class="linecons-doc"></i>
+                        <span class="title">有效被查记录：200</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">区块链节点图（绿色：我要查询他的黑名单，黄色：允许他查询我的黑名单，红色：不允许他查询我的黑名单）</h3>
+                    <div class="panel-options">
+                        <!--<a href="#" data-toggle="panel">
+                            <span class="collapse-icon">–</span>
+                            <span class="expand-icon">+</span>
+                        </a>
+                        <a href="#" data-toggle="remove">
+                            ×
+                        </a>-->
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div style="position:relative; height: 700px;">
+                                <div class="block block-top">
+                                    <img v-bind:src="node1.image">
+                                    <div class="node-text">{{node1.name}}</div>
+                                    <div class="node-text">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary dropdown-toggle"  data-toggle="dropdown">
+                                               变更 访问关系<span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-primary"  role="menu">
+                                                <li>
+                                                    <a href="#" @click="changeColor(node1, 'red')">红色：无黑名单服务</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" @click="changeColor(node1, 'green')">绿色：可查询可被查</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" @click="changeColor(node1, 'yellow')">黄色：不查询可被查</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="block block-left">
+                                    <img v-bind:src="node2.image">
+                                    <div class="node-text">{{node2.name}}</div>
+                                    <div class="node-text">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                              变更 访问关系 <span class="caret"></span>
+                                            </button>
+                                           <ul class="dropdown-menu dropdown-primary" role="menu">
+                                                <li>
+                                                    <a href="#" @click="changeColor(node1, 'red')">红色：无黑名单服务</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" @click="changeColor(node1, 'green')">绿色：可查询可被查</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" @click="changeColor(node1, 'yellow')">黄色：不查询可被查</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="block block-right">
+                                    <img v-bind:src="node3.image">
+                                    <div class="node-text">{{node3.name}}</div>
+                                    <div class="node-text">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                变更 访问关系<span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-primary" role="menu">
+                                                <li>
+                                                    <a href="#" @click="changeColor(node1, 'red')">红色：无黑名单服务</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" @click="changeColor(node1, 'green')">绿色：可查询可被查</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" @click="changeColor(node1, 'yellow')">黄色：不查询可被查</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="block block-bottom">
+                                    <img v-bind:src="node4.image">
+                                    <div class="node-text">{{node4.name}}</div>
+                                    <div class="node-text">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                变更 访问关系 <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-primary" role="menu">
+                                                <li>
+                                                    <a href="#" @click="changeColor(node1, 'red')">红色：无黑名单服务</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" @click="changeColor(node1, 'green')">绿色：可查询可被查</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" @click="changeColor(node1, 'yellow')">黄色：不查询可被查</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <footer class="main-footer sticky footer-type-1" style="">
+            <div class="footer-inner">
+                <div class="go-up">
+                    <a href="#" rel="go-top">
+                        <i class="fa-angle-up"></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+
+
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/vue.js"></script>
+<script>
+
+    new Vue({
+        el: '#app',
+        data: {
+            node1: {
+                image: 'images/node.png',
+                name:'XX银行'
+            },
+            node2: {
+                image: 'images/node-red.png',
+                name:'A银行：无黑名单服务'
+            },
+            node3: {
+                image: 'images/node-green.png',
+                name:'大行：可查询可被查'
+            },
+            node4: {
+                image: 'images/node-yellow.png',
+                name:'B银行：不查询可被查'
+            }
+        },
+        methods: {
+            changeColor: function(node, color){
+                node.image = 'images/node-'+color+'.png';
+            }
+        }
+    });
+</script>
+</body>
+</html>
